@@ -1,3 +1,5 @@
+import 'package:hive_flutter/adapters.dart';
+import 'package:notes_app/constants/constants.dart';
 import 'package:notes_app/models/note_model.dart';
 
 import 'add_note_cubit_state.dart';
@@ -9,7 +11,8 @@ class AddNoteCubitCubit extends Cubit<AddNoteCubitState> {
   addNote(NoteModel note) {
     emit(AddNoteCubiLoding());
     try {
-      // add note to database
+      var noteBox = Hive.box<NoteModel>(kNotBox);
+      noteBox.add(note);
       emit(AddNoteCubitSuccess());
     } catch (e) {
       emit(AddNoteCubitFauilir(e.toString()));
