@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:notes_app/widgets/custom_bottom.dart';
 import 'package:notes_app/widgets/custom_text_field.dart';
@@ -63,7 +61,6 @@ class _AddNoteFormState extends State<AddNoteForm> {
                   },
                 );
               }
-              log('title: $title, subtitle: $subtitle');
             },
           ),
           SizedBox(height: 18),
