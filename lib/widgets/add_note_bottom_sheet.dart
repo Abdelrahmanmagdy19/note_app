@@ -10,14 +10,16 @@ class AddNoteBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      child: SingleChildScrollView(
+    return BlocProvider(
+      create: (context) => AddNoteCubitCubit(),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         child: BlocConsumer<AddNoteCubitCubit, AddNoteCubitState>(
           listener: (context, state) {
             if (state is AddNoteCubitSuccess) {
               Navigator.pop(context);
-            } else if (state is AddNoteCubitFauilir) {
+            }
+            if (state is AddNoteCubitFauilir) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(state.errMassage),
@@ -28,7 +30,9 @@ class AddNoteBottomSheet extends StatelessWidget {
           builder: (context, state) {
             return ModalProgressHUD(
               inAsyncCall: state is AddNoteCubiLoding ? true : false,
-              child: AddNoteForm(),
+              child: SingleChildScrollView(
+                child: AddNoteForm(),
+              ),
             );
           },
         ),

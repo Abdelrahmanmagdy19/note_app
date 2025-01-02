@@ -8,11 +8,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class AddNoteCubitCubit extends Cubit<AddNoteCubitState> {
   AddNoteCubitCubit() : super(AddNoteCubitInitial());
 
-  addNote(NoteModel note) {
+  addNote(NoteModel note) async {
     emit(AddNoteCubiLoding());
     try {
       var noteBox = Hive.box<NoteModel>(kNotBox);
-      noteBox.add(note);
+      await noteBox.add(note);
       emit(AddNoteCubitSuccess());
     } catch (e) {
       emit(AddNoteCubitFauilir(e.toString()));
